@@ -1,11 +1,9 @@
 import type { Metadata } from 'next';
 
+import { AuthProvider } from '@context/authContext';
 import { GlobalContextProvider } from '@context/globalContext';
-import { Providers } from './providers';
+import { NextUiProviders } from '../context/nextUiContext';
 
-import Footer from '@components/commons/footers/Footer';
-import Header from '@components/commons/headers/Header';
-import Sidebar from '@components/commons/sidebars/Sidebar';
 import '@styles/globals.css';
 
 export const metadata: Metadata = {
@@ -20,15 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <Providers>
-          <GlobalContextProvider>
-            <Header />
-            <Sidebar />
-            {children}
-            <Footer />
-          </GlobalContextProvider>
-        </Providers>
+      <body suppressHydrationWarning={true}>
+        <AuthProvider>
+          <NextUiProviders>
+            <GlobalContextProvider>{children}</GlobalContextProvider>
+          </NextUiProviders>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -2,9 +2,9 @@ import Navbar from '../navbars/Navbar';
 
 const Header = () => {
   return (
-    <section className="flex flex-row justify-between p-4">
+    <div className="justify-between p-4 bg-gray-light">
       <Navbar />
-    </section>
+    </div>
   );
 };
 
