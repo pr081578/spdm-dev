@@ -1,5 +1,4 @@
-import { NavigationDataType } from '../../../types/navigationType';
-import { StatDataType } from '../../../types/statType';
+import type { NavigationDataType, StatDataType } from '@customTypes/generics';
 
 {
   /* 

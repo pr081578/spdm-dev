@@ -1,14 +1,15 @@
 'use client';
 
+import type { LogoDataType, NavigationDataType } from '@customTypes/generics';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 import { useState } from 'react';
-import { NavigationDataType } from '../../types/navigationType';
 
 interface SimpleHeroProps {
   announcement?: NavigationDataType;
   companyName?: NavigationDataType;
-  logo?: string;
+  logo?: LogoDataType;
   login?: NavigationDataType;
   navigation: NavigationDataType[];
   tagline?: string;
@@ -45,14 +46,11 @@ function SimpleHero({
               <span className="sr-only">
                 {companyName ? companyName.name : 'Your Company'}
               </span>
-              <img
-                className="h-8 w-auto scale-[3.5] "
-                src={
-                  logo
-                    ? logo
-                    : 'https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-                }
-                alt=""
+              <Image
+                src={logo ? logo.src : '/images/logo.png'}
+                alt={logo ? logo.alt : 'logo'}
+                width={180}
+                height={180}
               />
             </a>
           </div>
@@ -102,14 +100,11 @@ function SimpleHero({
                 <span className="sr-only">
                   {companyName ? companyName.name : 'Your Company'}
                 </span>
-                <img
-                  className="h-8 w-auto scale-[3.0]"
-                  src={
-                    logo
-                      ? logo
-                      : 'https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-                  }
-                  alt=""
+                <Image
+                  src={logo ? logo.src : '/images/logo.png'}
+                  alt={logo ? logo.alt : 'logo'}
+                  width={150}
+                  height={150}
                 />
               </a>
               <button

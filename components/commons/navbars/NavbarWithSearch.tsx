@@ -1,5 +1,6 @@
 'use client';
 
+import type { LogoDataType } from '@customTypes/generics';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -9,10 +10,15 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
+{
+  /*
 type LogoDataType = {
   src: string;
   href: string;
 };
+*/
+}
+
 interface NavbarWithSearchProps {
   logo?: LogoDataType;
 }

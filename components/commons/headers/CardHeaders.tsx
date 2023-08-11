@@ -1,4 +1,4 @@
-import { CardDataType } from '../../../types/cardType';
+import type { CardDataType } from '@customTypes/generics';
 {
   /*
 Example:

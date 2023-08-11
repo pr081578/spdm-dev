@@ -1,9 +1,8 @@
 'use client';
+import type { NavigationDataType } from '@customTypes/generics';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
-
-import { NavigationDataType } from '../../types/navigationType';
 
 interface WithImageTileHeroProps {
   navigation: NavigationDataType[];

@@ -6,6 +6,7 @@ import {
 } from '@heroicons/react/20/solid';
 
 const Page = () => {
+  // My Header Arguments //
   const supportTitle = 'Support Center';
   const supportDescription =
     "Welcome to our Support Center! We're here to assist you every step of the way. If you have questions, encounter issues, or need guidance on our car sharing host platform, here's how to get the support you need:";

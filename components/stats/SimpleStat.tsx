@@ -1,4 +1,4 @@
-import { StatDataType } from './../../types/statType';
+import type { StatDataType } from '@customTypes/generics';
 
 interface SimpleStatProps {
   stats: StatDataType[];
