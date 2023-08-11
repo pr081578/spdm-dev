@@ -2,12 +2,6 @@ import { Footer } from '@components/commons/footers/Footer';
 import { StackedFlyoutMenuHeader as MyHeader } from '@components/commons/headers/StackedFlyoutMenuHeader';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  // MyNavbar Arguments //
-  const navLogo = {
-    src: '/images/logo2.png',
-    href: '/',
-  };
-
   // Footer Arguments //
   const footernavigation = {
     solutions: [
