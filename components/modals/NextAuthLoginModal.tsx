@@ -10,17 +10,10 @@ import {
   ModalHeader,
   useDisclosure,
 } from '@nextui-org/react';
-import { useEffect, useState } from 'react';
 import { AiFillLock as LockIcon, AiFillMail as MailIcon } from 'react-icons/ai';
 
 export default function Login() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-  const [username, setUsername] = useState('');
-
-  useEffect(() => {
-    console.log(username);
-  }, [username]);
 
   return (
     <>
