@@ -4,6 +4,7 @@ import {
   LockClosedIcon,
   ServerIcon,
 } from '@heroicons/react/20/solid';
+import React from 'react';
 
 interface ContentProps {
   title?: string;
@@ -11,6 +12,8 @@ interface ContentProps {
   description?: string;
   introduction?: string;
   bulletins?: BulletinDataType[];
+  summary?: string;
+  closing?: string;
 }
 
 function WithImageContent({
@@ -19,6 +22,8 @@ function WithImageContent({
   description,
   introduction,
   bulletins,
+  summary,
+  closing,
 }: ContentProps) {
   return (
     <div className="relative bg-white">
@@ -64,7 +69,11 @@ function WithImageContent({
                   <>
                     {bulletins.map((bulletin, index) => (
                       <li key={index} className="flex gap-x-3">
-                        {bulletin.icon}
+                        {React.createElement(bulletin.icon.element, {
+                          width: bulletin.icon.width,
+                          height: bulletin.icon.height,
+                          color: bulletin.icon.color,
+                        })}
                         <span>
                           <strong className="font-semibold text-gray-900">
                             {bulletin.strong}
@@ -120,22 +129,26 @@ function WithImageContent({
                 )}
               </ul>
               <p className="mt-8">
-                Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis
+                {summary
+                  ? summary
+                  : `Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis
                 odio id et. Id blandit molestie auctor fermentum dignissim.
                 Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate
                 et ultrices hac adipiscing egestas. Iaculis convallis ac tempor
-                et ut. Ac lorem vel integer orci.
+                et ut. Ac lorem vel integer orci.`}
               </p>
               <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
                 No server? No problem.
               </h2>
               <p className="mt-6">
-                Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam
+                {closing
+                  ? closing
+                  : `Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam
                 consequat in. Convallis arcu ipsum urna nibh. Pharetra, euismod
                 vitae interdum mauris enim, consequat vulputate nibh. Maecenas
                 pellentesque id sed tellus mauris, ultrices mauris. Tincidunt
                 enim cursus ridiculus mi. Pellentesque nam sed nullam sed diam
-                turpis ipsum eu a sed convallis diam.
+                turpis ipsum eu a sed convallis diam.`}
               </p>
             </div>
           </div>

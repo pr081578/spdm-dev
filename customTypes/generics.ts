@@ -11,6 +11,13 @@ type LogoDataType = {
   href?: string;
 };
 
+type IconDataType = {
+  element: any;
+  width: number;
+  height: number;
+  color: string;
+};
+
 type ImageDataType = {
   src: string;
   alt: string;
@@ -57,7 +64,7 @@ type TestimonialDataType = {
 type BulletinDataType = {
   strong: string;
   text: string;
-  icon: any;
+  icon: IconDataType;
 };
 
 export type {
@@ -65,6 +72,7 @@ export type {
   CardDataType,
   ContentDataType,
   FaqDataType,
+  IconDataType,
   ImageDataType,
   LogoDataType,
   NavigationDataType,

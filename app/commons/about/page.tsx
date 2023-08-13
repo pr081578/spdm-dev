@@ -8,9 +8,11 @@ import {
   siteOurMission,
   sitePlatformStat,
 } from '@collections/siteCollections';
+import { WithImageContent } from '@components/contents/WithImageContent';
 import { WithTestimonialAndStatContent } from '@components/contents/WithTestimonialAndStatContent';
 import { WithTestimonialContent } from '@components/contents/WithTestimonialContent';
 import { WithSmallImageTeam } from '@components/teams/WithSmallImageTeam';
+import { CloudArrowUpIcon, LockClosedIcon } from '@heroicons/react/20/solid';
 
 const team = {
   title: 'Discover our team',
@@ -47,11 +49,34 @@ const ourMission = {
   },
 };
 
+const bulletins = [
+  {
+    icon: {
+      element: CloudArrowUpIcon,
+      width: 25,
+      height: 25,
+      color: '#4338ca',
+    },
+    strong: 'Push to deploy',
+    text: 'dfadssfadsfadsfsd',
+  },
+  {
+    icon: {
+      element: LockClosedIcon,
+      width: 25,
+      height: 25,
+      color: '#4338ca',
+    },
+    strong: 'SSL certificates',
+    text: 'dfadssfadsfadsfsd',
+  },
+];
 const Page = () => {
   return (
     <>
       <WithImageTileHero navigation={siteNavbarNavigation} />
-      <WithTestimonialContent />
+      <WithTestimonialContent bulletins={bulletins} />
+      <WithImageContent bulletins={bulletins} />
       <WithTestimonialAndStatContent
         title={ourMission.title}
         headline={ourMission.headline}
