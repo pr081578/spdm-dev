@@ -1,5 +1,6 @@
 import type {
   BulletinDataType,
+  SimpleContentDataType,
   TestimonialDataType,
 } from '@customTypes/generics';
 import {
@@ -7,6 +8,7 @@ import {
   LockClosedIcon,
   ServerIcon,
 } from '@heroicons/react/20/solid';
+import Image from 'next/image';
 import React from 'react';
 
 interface ContentProps {
@@ -16,7 +18,7 @@ interface ContentProps {
   introduction?: string;
   bulletins?: BulletinDataType[];
   summary?: string;
-  closing?: string;
+  closing?: SimpleContentDataType;
   testimonial?: TestimonialDataType;
 }
 
@@ -85,28 +87,57 @@ function WithTestimonialContent({
               />
             </svg>
             <figure className="border-l border-indigo-600 pl-8">
-              {}
-              <blockquote className="text-xl font-semibold leading-8 tracking-tight text-gray-900">
-                <p>
-                  “Vel ultricies morbi odio facilisi ultrices accumsan donec
-                  lacus purus. Lectus nibh ullamcorper ac dictum justo in
-                  euismod. Risus aenean ut elit massa. In amet aliquet eget
-                  cras. Sem volutpat enim tristique.”
-                </p>
-              </blockquote>
-              <figcaption className="mt-8 flex gap-x-4">
-                <img
-                  src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  alt=""
-                  className="mt-1 h-10 w-10 flex-none rounded-full bg-gray-50"
-                />
-                <div className="text-sm leading-6">
-                  <div className="font-semibold text-gray-900">
-                    Brenna Goyette
-                  </div>
-                  <div className="text-gray-600">@brenna</div>
-                </div>
-              </figcaption>
+              {testimonial ? (
+                <>
+                  <blockquote className="text-xl font-semibold leading-8 tracking-tight text-gray-900">
+                    <p>“{testimonial.comment}”</p>
+                  </blockquote>
+                  <figcaption className="mt-8 flex gap-x-4">
+                    <Image
+                      className="mt-1 h-10 w-10 flex-none rounded-full bg-gray-50"
+                      src={testimonial.image.src}
+                      alt={testimonial.image.alt}
+                      width={testimonial.image.width}
+                      height={testimonial.image.height}
+                    />
+
+                    <div className="text-sm leading-6">
+                      <div className="font-semibold text-gray-900">
+                        {testimonial.name}
+                      </div>
+                      <div className="text-gray-600">
+                        {testimonial.socialTagName
+                          ? testimonial.socialTagName
+                          : ''}
+                      </div>
+                    </div>
+                  </figcaption>
+                </>
+              ) : (
+                <>
+                  <blockquote className="text-xl font-semibold leading-8 tracking-tight text-gray-900">
+                    <p>
+                      “Vel ultricies morbi odio facilisi ultrices accumsan donec
+                      lacus purus. Lectus nibh ullamcorper ac dictum justo in
+                      euismod. Risus aenean ut elit massa. In amet aliquet eget
+                      cras. Sem volutpat enim tristique.”
+                    </p>
+                  </blockquote>
+                  <figcaption className="mt-8 flex gap-x-4">
+                    <img
+                      src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      alt=""
+                      className="mt-1 h-10 w-10 flex-none rounded-full bg-gray-50"
+                    />
+                    <div className="text-sm leading-6">
+                      <div className="font-semibold text-gray-900">
+                        Brenna Goyette
+                      </div>
+                      <div className="text-gray-600">@brenna</div>
+                    </div>
+                  </figcaption>
+                </>
+              )}
             </figure>
           </div>
           <div className="max-w-xl text-base leading-7 text-gray-700 lg:col-span-7">
@@ -193,19 +224,28 @@ function WithTestimonialContent({
                 et ultrices hac adipiscing egestas. Iaculis convallis ac tempor
                 et ut. Ac lorem vel integer orci.`}
             </p>
-            <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
-              No server? No problem.
-            </h2>
-            <p className="mt-6">
-              {closing
-                ? closing
-                : `Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam
-                consequat in. Convallis arcu ipsum urna nibh. Pharetra, euismod
-                vitae interdum mauris enim, consequat vulputate nibh. Maecenas
-                pellentesque id sed tellus mauris, ultrices mauris. Tincidunt
-                enim cursus ridiculus mi. Pellentesque nam sed nullam sed diam
-                turpis ipsum eu a sed convallis diam.`}
-            </p>
+            {closing ? (
+              <>
+                <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
+                  {closing.title}
+                </h2>
+                <p className="mt-6">{closing.content}</p>
+              </>
+            ) : (
+              <>
+                <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
+                  No operations? No problem.
+                </h2>
+                <p className="mt-6">
+                  Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam
+                  consequat in. Convallis arcu ipsum urna nibh. Pharetra,
+                  euismod vitae interdum mauris enim, consequat vulputate nibh.
+                  Maecenas pellentesque id sed tellus mauris, ultrices mauris.
+                  Tincidunt enim cursus ridiculus mi. Pellentesque nam sed
+                  nullam sed diam turpis ipsum eu a sed convallis diam.
+                </p>
+              </>
+            )}
           </div>
         </div>
       </div>

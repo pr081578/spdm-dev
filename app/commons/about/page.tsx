@@ -12,7 +12,12 @@ import { WithImageContent } from '@components/contents/WithImageContent';
 import { WithTestimonialAndStatContent } from '@components/contents/WithTestimonialAndStatContent';
 import { WithTestimonialContent } from '@components/contents/WithTestimonialContent';
 import { WithSmallImageTeam } from '@components/teams/WithSmallImageTeam';
-import { CloudArrowUpIcon, LockClosedIcon } from '@heroicons/react/20/solid';
+import {
+  ChartBarIcon,
+  HandThumbUpIcon,
+  HomeIcon,
+} from '@heroicons/react/20/solid';
+import { ArrowTrendingUpIcon } from '@heroicons/react/24/outline';
 
 const team = {
   title: 'Discover our team',
@@ -49,34 +54,129 @@ const ourMission = {
   },
 };
 
-const bulletins = [
-  {
-    icon: {
-      element: CloudArrowUpIcon,
-      width: 25,
-      height: 25,
-      color: '#4338ca',
+const ourContent = {
+  title: 'Seemless Operations',
+  headline: 'An automated workflow',
+  description: `At SPDM we understand that time is precious, and efficiency is paramount. 
+  That's why we've meticulously designed an automated workflow tailored specifically for 
+  owners and hosts.`,
+  introduction: ` Our goal is to empower you with a seamless, hassle-free experience 
+  that maximizes your convenience and potential, allowing you to focus on what truly matters: 
+  providing exceptional experiences and optimizing your returns.`,
+  bulletins: [
+    {
+      icon: {
+        element: ArrowTrendingUpIcon,
+        width: 35,
+        height: 35,
+        color: '#4338ca',
+      },
+      strong: 'Streamlined Operations',
+      text: ` No more manual coordination or time-consuming tasks—just effortless ownership with peace of mind.`,
     },
-    strong: 'Push to deploy',
-    text: 'dfadssfadsfadsfsd',
-  },
-  {
-    icon: {
-      element: LockClosedIcon,
-      width: 25,
-      height: 25,
-      color: '#4338ca',
+    {
+      icon: {
+        element: HomeIcon,
+        width: 35,
+        height: 35,
+        color: '#4338ca',
+      },
+      strong: 'Effortless Hosting',
+      text: `Hosting on our platform is a breeze, from handling guest inquiries, bookings, our system controls without the stress`,
     },
-    strong: 'SSL certificates',
-    text: 'dfadssfadsfadsfsd',
+    {
+      icon: {
+        element: ChartBarIcon,
+        width: 35,
+        height: 35,
+        color: '#4338ca',
+      },
+      strong: 'Real-Time Insights',
+      text: `Our platform provides real-time insights into your vehicle's performance, earnings, and guest reviews.`,
+    },
+    {
+      icon: {
+        element: HandThumbUpIcon,
+        width: 35,
+        height: 35,
+        color: '#4338ca',
+      },
+      strong: 'Peace of Mind and Growth',
+      text: `With our automated workflow, we aim to offer peace of mind to owners and hosts.`,
+    },
+  ],
+  summary: `Discover the power of automation with SPDM Fleet Management Operations Service. 
+  Join us, and let our platform revolutionize your ownership and hosting journey. Experience 
+  the future of car sharing, where technology and convenience work together seamlessly for 
+  your benefit.`,
+  closing: {
+    title: 'No operations? No Problem',
+    content: `At SPDM, we're more than just a platform; we're a community united by a shared 
+  vision of convenience, sustainability, and exceptional experiences. Join us as we reshape 
+  the way we move, connect, and care for our world. Together, we're driving towards a brighter 
+  future, one ride at a time. Thank you for being a part of this journey with us.`,
   },
-];
+  testimonial: {
+    name: 'Jane Doe',
+    image: {
+      src: '/images/test-photo.jpeg',
+      alt: 'Jane Doe',
+      width: 40,
+      height: 40,
+    },
+    comment: `I'm thrilled with this car sharing platform! It's incredibly user-friendly, 
+    and the range of vehicles available is impressive. It's changed the way I travel,
+     making it both convenient and eco-friendly. Highly recommend it!`,
+    socialTagName: '@jdoe',
+  },
+};
+
+const ourHero = {
+  title: `We're changin the way car sharing operations`,
+  description: `We're revolutionizing car sharing operations by introducing an innovative 
+  platform that streamlines every step of the journey. Our technology simplifies vehicle listings, 
+  automates bookings, and enhances communication between owners, hosts, and guests. With a focus on trust, 
+  safety, and sustainability, we're reshaping the car sharing landscape to create a more efficient, 
+  convenient, and community-driven experience for everyone involved.`,
+  primaryLink: {
+    name: 'Get started',
+    href: '/commons/get-started',
+  },
+  secondaryLink: {
+    name: 'Learn more',
+    href: '/commons/learn-more',
+  },
+  navigation: siteNavbarNavigation,
+};
 const Page = () => {
   return (
     <>
-      <WithImageTileHero navigation={siteNavbarNavigation} />
-      <WithTestimonialContent bulletins={bulletins} />
-      <WithImageContent bulletins={bulletins} />
+      <WithImageTileHero
+        title={ourHero.title}
+        description={ourHero.description}
+        primaryLink={ourHero.primaryLink}
+        secondaryLink={ourHero.secondaryLink}
+        navigation={siteNavbarNavigation}
+      />
+      <WithTestimonialContent
+        title={ourContent.title}
+        headline={ourContent.headline}
+        description={ourContent.description}
+        introduction={ourContent.introduction}
+        summary={ourContent.summary}
+        closing={ourContent.closing}
+        bulletins={ourContent.bulletins}
+        testimonial={ourContent.testimonial}
+      />
+      <WithImageContent
+        title={ourContent.title}
+        headline={ourContent.headline}
+        description={ourContent.description}
+        introduction={ourContent.introduction}
+        summary={ourContent.summary}
+        closing={ourContent.closing}
+        bulletins={ourContent.bulletins}
+      />
       <WithTestimonialAndStatContent
         title={ourMission.title}
         headline={ourMission.headline}

@@ -1,4 +1,7 @@
-import type { BulletinDataType } from '@customTypes/generics';
+import type {
+  BulletinDataType,
+  SimpleContentDataType,
+} from '@customTypes/generics';
 import {
   CloudArrowUpIcon,
   LockClosedIcon,
@@ -13,7 +16,7 @@ interface ContentProps {
   introduction?: string;
   bulletins?: BulletinDataType[];
   summary?: string;
-  closing?: string;
+  closing?: SimpleContentDataType;
 }
 
 function WithImageContent({
@@ -137,19 +140,28 @@ function WithImageContent({
                 et ultrices hac adipiscing egestas. Iaculis convallis ac tempor
                 et ut. Ac lorem vel integer orci.`}
               </p>
-              <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
-                No server? No problem.
-              </h2>
-              <p className="mt-6">
-                {closing
-                  ? closing
-                  : `Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam
-                consequat in. Convallis arcu ipsum urna nibh. Pharetra, euismod
-                vitae interdum mauris enim, consequat vulputate nibh. Maecenas
-                pellentesque id sed tellus mauris, ultrices mauris. Tincidunt
-                enim cursus ridiculus mi. Pellentesque nam sed nullam sed diam
-                turpis ipsum eu a sed convallis diam.`}
-              </p>
+              {closing ? (
+                <>
+                  <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
+                    {closing.title}
+                  </h2>
+                  <p className="mt-6">{closing.content}</p>
+                </>
+              ) : (
+                <>
+                  <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
+                    No operations? No problem.
+                  </h2>
+                  <p className="mt-6">
+                    Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam
+                    consequat in. Convallis arcu ipsum urna nibh. Pharetra,
+                    euismod vitae interdum mauris enim, consequat vulputate
+                    nibh. Maecenas pellentesque id sed tellus mauris, ultrices
+                    mauris. Tincidunt enim cursus ridiculus mi. Pellentesque nam
+                    sed nullam sed diam turpis ipsum eu a sed convallis diam.
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </div>

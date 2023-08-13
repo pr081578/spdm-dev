@@ -55,16 +55,22 @@ type ContentDataType = {
 
 type TestimonialDataType = {
   name: string;
-  title: string;
-  company: string;
+  title?: string;
+  company?: string;
   image: ImageDataType;
   comment: string;
+  socialTagName?: string;
 };
 
 type BulletinDataType = {
   strong: string;
   text: string;
   icon: IconDataType;
+};
+
+type SimpleContentDataType = {
+  title: string;
+  content: string;
 };
 
 export type {
@@ -77,6 +83,7 @@ export type {
   LogoDataType,
   NavigationDataType,
   PersonDataType,
+  SimpleContentDataType,
   StatDataType,
   TestimonialDataType,
 };
