@@ -45,7 +45,7 @@ const ourMission = {
     title: 'Owner',
     company: 'EASY Ride LLC',
     image: {
-      src: 'https://tailwindui.com/img/logos/workcation-logo-white.svg',
+      src: '',
       alt: 'EASy Ride LLC',
       width: 150,
       height: 150,

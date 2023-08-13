@@ -30,6 +30,7 @@ function WithTestimonialAndStatContent({
                 className="absolute inset-0 h-full w-full object-cover brightness-125 saturate-0"
                 src="/images/contents/people-jumping.jpeg"
                 alt=""
+                fill
               />
               <div className="absolute inset-0 bg-gray-900 mix-blend-multiply" />
               <div

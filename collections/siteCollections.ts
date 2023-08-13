@@ -49,14 +49,12 @@ const siteCompanyPersonel = [
   {
     name: 'Perrie Russell',
     role: 'Founder / CEO',
-    imageUrl:
-      'https://media.licdn.com/dms/image/D5603AQE6zq2XIbKVZw/profile-displayphoto-shrink_200_200/0/1681904484733?e=1697068800&v=beta&t=dCfzJtUt0FZWMQ-fr6WEsdSWqiIIJ6RDN6Qi5hmSvMw',
+    imageUrl: '/images/company/employees/ceo-photo.jpeg',
   },
   {
     name: 'Leslie Alexander',
     role: 'President',
-    imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    imageUrl: '/images/company/employees/pres-photo.jpeg',
   },
 ];
 

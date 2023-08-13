@@ -234,8 +234,8 @@ function WithImageTileHero({
                         src="/images/heroes/collaborate-meeting-room.jpeg"
                         alt=""
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-                        width={200}
-                        height={200}
+                        width={300}
+                        height={300}
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
                     </div>
@@ -256,8 +256,8 @@ function WithImageTileHero({
                         src="/images/heroes/collaborate-office-computer-80.jpeg"
                         alt=""
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-                        width={200}
-                        height={200}
+                        width={300}
+                        height={300}
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
                     </div>
@@ -268,8 +268,8 @@ function WithImageTileHero({
                         src="/images/heroes/man-holding-tablet.jpeg"
                         alt=""
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-                        width={200}
-                        height={200}
+                        width={300}
+                        height={300}
                       />
 
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
@@ -279,8 +279,8 @@ function WithImageTileHero({
                         src="/images/heroes/women-laughing.jpeg"
                         alt=""
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-                        width={200}
-                        height={200}
+                        width={300}
+                        height={300}
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
                     </div>

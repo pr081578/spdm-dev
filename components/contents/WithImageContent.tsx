@@ -38,6 +38,7 @@ function WithImageContent({
               className="absolute inset-0 h-full w-full bg-gray-50 object-cover"
               src="/images/contents/collaborate-office-computer.jpeg"
               alt=""
+              fill
             />
           </div>
         </div>
