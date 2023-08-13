@@ -61,6 +61,7 @@ type BulletinDataType = {
 };
 
 export type {
+  BulletinDataType,
   CardDataType,
   ContentDataType,
   FaqDataType,
