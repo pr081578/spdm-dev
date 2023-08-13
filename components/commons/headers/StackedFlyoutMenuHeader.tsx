@@ -190,10 +190,12 @@ function StackedFlyoutMenuHeader({ logo }: HeaderProps) {
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
+              <Image
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
+                src="/images/logo2.png"
+                alt="Logo"
+                width={100}
+                height={100}
               />
             </a>
             <button

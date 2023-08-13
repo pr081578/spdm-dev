@@ -1,4 +1,5 @@
 import type { PersonDataType } from '@customTypes/generics';
+import Image from 'next/image';
 
 interface TeamProps {
   title?: string;
@@ -28,10 +29,12 @@ function WithSmallImageTeam({ description, people, title }: TeamProps) {
           {people.map((person) => (
             <li key={person.name}>
               <div className="flex items-center gap-x-6">
-                <img
+                <Image
                   className="h-16 w-16 rounded-full"
                   src={person.imageUrl}
                   alt=""
+                  width={100}
+                  height={100}
                 />
                 <div>
                   <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">

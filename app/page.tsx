@@ -25,12 +25,6 @@ const heroCompanyName = {
   name: 'SPDM',
   href: '/',
 };
-const heroLogo = {
-  name: 'Logo',
-  src: '/images/logo.png',
-  alt: 'logo',
-  href: '/',
-};
 
 const heroTagline = 'Enrich and empower your car sharing business';
 const heroTaglineDescription =

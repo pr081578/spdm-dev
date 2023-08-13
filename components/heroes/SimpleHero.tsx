@@ -40,7 +40,7 @@ function SimpleHero({
         >
           <div className="flex lg:flex-1">
             <a
-              href={companyName ? companyName.href : '#'}
+              href={companyName ? companyName.href : '/'}
               className="-m-1.5 p-1.5"
             >
               <span className="sr-only">
@@ -77,7 +77,7 @@ function SimpleHero({
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
-              href="#"
+              href="/api/auth/signin"
               className="text-sm font-semibold leading-6 text-gray-900"
             >
               Log in <span aria-hidden="true">&rarr;</span>
@@ -94,7 +94,7 @@ function SimpleHero({
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a
-                href={companyName ? companyName.href : '#'}
+                href={companyName ? companyName.href : '/'}
                 className="-m-1.5 p-1.5"
               >
                 <span className="sr-only">
@@ -131,7 +131,7 @@ function SimpleHero({
                 </div>
                 <div className="py-6">
                   <a
-                    href="#"
+                    href="/api/auth/signin"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     {login ? login.name : 'Log in'}
@@ -164,7 +164,7 @@ function SimpleHero({
                 : 'Announcing our next round of funding'}
               .{' '}
               <a
-                href={announcement ? announcement.href : '#'}
+                href={announcement ? announcement.href : '/'}
                 className="font-semibold text-indigo-600"
               >
                 <span className="absolute inset-0" aria-hidden="true" />
@@ -183,13 +183,13 @@ function SimpleHero({
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
-                href={primaryLink ? primaryLink.href : '#'}
+                href={primaryLink ? primaryLink.href : '/'}
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 {primaryLink ? primaryLink.name : 'Get started'}
               </a>
               <a
-                href={secondaryLink ? secondaryLink.href : '#'}
+                href={secondaryLink ? secondaryLink.href : '/'}
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
                 {secondaryLink ? secondaryLink.name : 'Learn more'}{' '}

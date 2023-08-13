@@ -4,19 +4,11 @@ import type { LogoDataType } from '@customTypes/generics';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 import { Fragment } from 'react';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
-}
-
-{
-  /*
-type LogoDataType = {
-  src: string;
-  href: string;
-};
-*/
 }
 
 interface NavbarWithSearchProps {
@@ -33,14 +25,12 @@ function NavbarWithSearch({ logo }: NavbarWithSearchProps) {
               <div className="flex px-2 lg:px-0">
                 <div className="flex flex-shrink-0 items-center">
                   <a href={logo ? logo.href : '/'}>
-                    <img
+                    <Image
                       className={logo ? 'h-8 w-auto scale-[3.0]' : 'h-8 w-auto'}
-                      src={
-                        logo
-                          ? logo.src
-                          : 'https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-                      }
-                      alt="Your Company"
+                      src={logo ? logo.src : '/images/logo2.png'}
+                      alt="Logo"
+                      width={100}
+                      height={100}
                     />
                   </a>
                 </div>
@@ -122,10 +112,12 @@ function NavbarWithSearch({ logo }: NavbarWithSearchProps) {
                     <Menu.Button className="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
-                      <img
+                      <Image
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src="/images/navbars/man-with-glass.jpeg"
                         alt=""
+                        width={100}
+                        height={100}
                       />
                     </Menu.Button>
                   </div>
@@ -220,10 +212,12 @@ function NavbarWithSearch({ logo }: NavbarWithSearchProps) {
             <div className="border-t border-gray-200 pb-3 pt-4">
               <div className="flex items-center px-4">
                 <div className="flex-shrink-0">
-                  <img
+                  <Image
                     className="h-10 w-10 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    src="/images/navbars/man-with-glass.jpeg"
                     alt=""
+                    width={100}
+                    height={100}
                   />
                 </div>
                 <div className="ml-3">
