@@ -1,14 +1,17 @@
 'use client';
-import type { NavigationDataType } from '@customTypes/generics';
+
+import type { LogoDataType, NavigationDataType } from '@customTypes/generics';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 import { useState } from 'react';
 
 interface WithImageTileHeroProps {
+  logo?: LogoDataType;
   navigation: NavigationDataType[];
 }
 
-function WithImageTileHero({ navigation }: WithImageTileHeroProps) {
+function WithImageTileHero({ logo, navigation }: WithImageTileHeroProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -21,10 +24,11 @@ function WithImageTileHero({ navigation }: WithImageTileHeroProps) {
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
+              <Image
+                src={logo ? logo.src : '/images/logo2.png'}
+                alt={logo ? logo.alt : 'logo'}
+                width={100}
+                height={100}
               />
             </a>
           </div>

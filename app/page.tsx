@@ -10,6 +10,12 @@ import {
   LinkIcon,
 } from '@heroicons/react/24/outline';
 
+import {
+  siteFooterNavigation,
+  siteNavbarNavigation,
+  sitePlatformStat,
+} from '@collections/siteCollections';
+
 // My Hero Arguments //
 const heroAnnouncement = {
   name: 'Becoming one of SPDM Host or Owners',
@@ -26,11 +32,6 @@ const heroLogo = {
   href: '/',
 };
 
-const heroNavigation = [
-  { name: 'About Us', href: '/commons/about' },
-  { name: 'Support', href: '/commons/support' },
-  { name: "FAQ's", href: '/commons/faqs' },
-];
 const heroTagline = 'Enrich and empower your car sharing business';
 const heroTaglineDescription =
   "Welcome to our car sharing host, where convenience meets community. Whether you're in need of a sleek city cruiser or a rugged adventure companion, our diverse fleet of well-maintained vehicles is at your fingertips, all supported by a network of friendly hosts ready to make your journey unforgettable.";
@@ -43,13 +44,6 @@ const heroSecondaryLink = {
   href: '/commons/learn-more',
 };
 
-// My Stat Agruments //
-const stats = [
-  { id: 1, name: 'Members on the platform', value: '8,000+' },
-  { id: 2, name: 'Platform fee low as', value: '3%' },
-  { id: 3, name: 'Uptime guarantee', value: '99.9%' },
-  { id: 4, name: 'Market Size Revenue', value: '$6B' },
-];
 const statTitle = 'Trusted by owners and hosts worldwide';
 const statBrief =
   'For hosts and owners, unlock the road to shared adventures and sustainable solutions.';
@@ -102,32 +96,6 @@ const ctaSecondaryLink = {
 };
 
 // Footer Arguments //
-const footerNavigation = {
-  solutions: [
-    { name: 'Marketing', href: '#' },
-    { name: 'Analytics', href: '#' },
-    { name: 'Commerce', href: '#' },
-    { name: 'Insights', href: '#' },
-  ],
-  support: [
-    { name: 'Pricing', href: '#' },
-    { name: 'Documentation', href: '#' },
-    { name: 'Guides', href: '#' },
-    { name: 'API Status', href: '#' },
-  ],
-  company: [
-    { name: 'About', href: '#' },
-    { name: 'Blog', href: '#' },
-    { name: 'Jobs', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Partners', href: '#' },
-  ],
-  legal: [
-    { name: 'Claim', href: '#' },
-    { name: 'Privacy', href: '#' },
-    { name: 'Terms', href: '#' },
-  ],
-};
 
 const footerLogo = {
   name: 'logo',
@@ -141,15 +109,14 @@ export default function Home() {
     <div>
       <MyHero
         announcement={heroAnnouncement}
-        navigation={heroNavigation}
+        navigation={siteNavbarNavigation}
         companyName={heroCompanyName}
-        logo={heroLogo}
         tagline={heroTagline}
         taglineDescription={heroTaglineDescription}
         primaryLink={heroPrimaryLink}
         secondaryLink={heroSecondaryLink}
       />
-      <MyStat stats={stats} title={statTitle} brief={statBrief} />
+      <MyStat stats={sitePlatformStat} title={statTitle} brief={statBrief} />
       <MyFeature
         features={features}
         title={featureTitle}
@@ -163,7 +130,7 @@ export default function Home() {
         primaryLink={ctaPrimaryLink}
         secondaryLink={ctaSecondaryLink}
       />
-      <Footer navigation={footerNavigation} logo={footerLogo} />
+      <Footer navigation={siteFooterNavigation} logo={footerLogo} />
     </div>
   );
 }

@@ -1,14 +1,14 @@
 'use client';
-import { Link } from '@nextui-org/react';
-import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+import { Link } from '@nextui-org/react';
 
 export const Copyright = () => (
-  <div className={inter.className}>
-    {'Copyright © '}
-    <Link href="https://material-ui.com/">SPDM LLC</Link>{' '}
-    {new Date().getFullYear()}
+  <>
+    <Link href="/">
+      <p className="mt-10 text-center text-xs leading-5 text-gray-500">
+        &copy; {new Date().getFullYear()} SPDM LLC, All rights reserved.
+      </p>
+    </Link>{' '}
     {'.'}
-  </div>
+  </>
 );

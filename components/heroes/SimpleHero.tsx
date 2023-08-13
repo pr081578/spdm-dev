@@ -47,10 +47,10 @@ function SimpleHero({
                 {companyName ? companyName.name : 'Your Company'}
               </span>
               <Image
-                src={logo ? logo.src : '/images/logo.png'}
+                src={logo ? logo.src : '/images/logo2.png'}
                 alt={logo ? logo.alt : 'logo'}
-                width={180}
-                height={180}
+                width={100}
+                height={100}
               />
             </a>
           </div>

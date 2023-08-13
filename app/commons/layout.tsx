@@ -1,5 +1,4 @@
 import { Footer } from '@components/commons/footers/Footer';
-import { StackedFlyoutMenuHeader as MyHeader } from '@components/commons/headers/StackedFlyoutMenuHeader';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   // Footer Arguments //
@@ -38,7 +37,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   };
   return (
     <>
-      <MyHeader />
       {children}
       <Footer navigation={footernavigation} logo={footerLogo} />
     </>
