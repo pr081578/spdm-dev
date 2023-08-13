@@ -98,11 +98,7 @@ function Footer({ logo, navigation }: FooterProps) {
       <div className="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8 lg:py-32">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <Image
-            src={
-              logo
-                ? logo.src
-                : 'https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-            }
+            src={logo ? logo.src : '/images/logo2.png'}
             alt={logo ? logo.alt : 'logo'}
             width={100}
             height={100}

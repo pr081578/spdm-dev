@@ -49,7 +49,8 @@ function SimpleHero({
               <Image
                 src={logo ? logo.src : '/images/logo2.png'}
                 alt={logo ? logo.alt : 'logo'}
-                fill
+                width={100}
+                height={100}
               />
             </a>
           </div>
@@ -102,7 +103,8 @@ function SimpleHero({
                 <Image
                   src={logo ? logo.src : '/images/logo.png'}
                   alt={logo ? logo.alt : 'logo'}
-                  fill
+                  width={100}
+                  height={100}
                 />
               </a>
               <button
