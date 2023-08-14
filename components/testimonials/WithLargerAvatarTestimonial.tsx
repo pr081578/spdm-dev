@@ -33,8 +33,8 @@ function WithLargerAvatarTestimonial() {
               className="rounded-xl bg-indigo-50 lg:rounded-3xl"
               src="/images/testimonials/young-lady-in-red-smiling.jpeg"
               alt=""
-              width={100}
-              height={100}
+              width={270}
+              height={270}
             />
           </div>
           <figcaption className="text-base lg:col-start-1 lg:row-start-3">

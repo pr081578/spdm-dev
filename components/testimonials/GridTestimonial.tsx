@@ -5,8 +5,7 @@ const featuredTestimonial = {
   author: {
     name: 'Brenna Goyette',
     handle: 'brennagoyette',
-    imageUrl:
-      'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80',
+    imageUrl: '/images/testimonials/woman-in-white-shirt.jpeg',
     logoUrl: 'https://tailwindui.com/img/logos/savvycal-logo-gray-900.svg',
   },
 };
@@ -18,8 +17,7 @@ const testimonials = [
         author: {
           name: 'Leslie Alexander',
           handle: 'lesliealexander',
-          imageUrl:
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+          imageUrl: '/images/testimonials/young-lady-in-red-smiling.jpeg',
         },
       },
       // More testimonials...
@@ -30,8 +28,7 @@ const testimonials = [
         author: {
           name: 'Lindsay Walton',
           handle: 'lindsaywalton',
-          imageUrl:
-            'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+          imageUrl: '/images/testimonials/woman-in-blue.jpeg',
         },
       },
       // More testimonials...
@@ -44,8 +41,7 @@ const testimonials = [
         author: {
           name: 'Tom Cook',
           handle: 'tomcook',
-          imageUrl:
-            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+          imageUrl: '/images/testimonials/man-in-glass-looking-left.jpeg',
         },
       },
       // More testimonials...
@@ -56,8 +52,7 @@ const testimonials = [
         author: {
           name: 'Leonard Krasner',
           handle: 'leonardkrasner',
-          imageUrl:
-            'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+          imageUrl: '/images/testimonials/man-in-sunglasses.jpeg',
         },
       },
       // More testimonials...
