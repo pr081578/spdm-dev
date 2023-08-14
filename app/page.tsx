@@ -31,11 +31,11 @@ const heroTaglineDescription =
   "Welcome to our car sharing host, where convenience meets community. Whether you're in need of a sleek city cruiser or a rugged adventure companion, our diverse fleet of well-maintained vehicles is at your fingertips, all supported by a network of friendly hosts ready to make your journey unforgettable.";
 const heroPrimaryLink = {
   name: 'Get started',
-  href: '/commons/get-started',
+  href: '/register',
 };
 const heroSecondaryLink = {
   name: 'Learn more',
-  href: '/commons/learn-more',
+  href: '/commons/about',
 };
 
 const statTitle = 'Trusted by owners and hosts worldwide';
