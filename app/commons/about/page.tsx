@@ -140,7 +140,7 @@ const ourHero = {
   convenient, and community-driven experience for everyone involved.`,
   primaryLink: {
     name: 'Get started',
-    href: '/commons/get-started',
+    href: '/register',
   },
   secondaryLink: {
     name: 'Read more',
