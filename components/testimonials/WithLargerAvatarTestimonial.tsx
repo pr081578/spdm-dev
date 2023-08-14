@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 function WithLargerAvatarTestimonial() {
   return (
     <section className="isolate overflow-hidden bg-white px-6 lg:px-8">
@@ -27,10 +29,12 @@ function WithLargerAvatarTestimonial() {
             </blockquote>
           </div>
           <div className="col-end-1 w-16 lg:row-span-4 lg:w-72">
-            <img
+            <Image
               className="rounded-xl bg-indigo-50 lg:rounded-3xl"
-              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=576&h=576&q=80"
+              src="/images/testimonials/young-lady-in-red-smiling.jpeg"
               alt=""
+              width={100}
+              height={100}
             />
           </div>
           <figcaption className="text-base lg:col-start-1 lg:row-start-3">
