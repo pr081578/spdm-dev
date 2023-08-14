@@ -43,7 +43,15 @@ const ourMission = {
   testimonial: {
     name: 'Jane Doe',
     title: 'Owner',
-    company: 'EASY Ride LLC',
+    company: {
+      name: 'EASY Ride LLC',
+      logoImage: {
+        src: '',
+        alt: '',
+        width: 0,
+        height: 0,
+      },
+    },
     image: {
       src: '',
       alt: 'EASy Ride LLC',

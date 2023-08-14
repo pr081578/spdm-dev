@@ -53,13 +53,18 @@ type ContentDataType = {
   class: string;
 };
 
+type CompanyDataType = {
+  name: string;
+  logoImage: ImageDataType;
+};
+
 type TestimonialDataType = {
   name: string;
   title?: string;
-  company?: string;
+  company?: CompanyDataType;
   image: ImageDataType;
   comment: string;
-  socialTagName?: string;
+  handle?: string;
 };
 
 type BulletinDataType = {
@@ -84,6 +89,7 @@ export type {
   AddressDataType,
   BulletinDataType,
   CardDataType,
+  CompanyDataType,
   ContentDataType,
   FaqDataType,
   IconDataType,

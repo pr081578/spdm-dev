@@ -240,15 +240,102 @@ const siteContact = {
     email: `support@thespdm.com`,
   },
 };
+
+const siteFeaturedTestimonial = {
+  comment:
+    'Integer id nunc sit semper purus. Bibendum at lacus ut arcu blandit montes vitae auctor libero. Hac condimentum dignissim nibh vulputate ut nunc. Amet nibh orci mi venenatis blandit vel et proin. Non hendrerit in vel ac diam.',
+  name: 'Brenna Goyette',
+  handle: 'brennagoyette',
+  image: {
+    src: '/images/testimonials/woman-in-white-shirt.jpeg',
+    alt: 'Brenna Goyette',
+    width: 100,
+    height: 100,
+  },
+  logoImage: {
+    src: '/images/testimonials/savvycal-logo-gray-900.svg',
+    alt: 'savvy',
+    width: 100,
+    height: 100,
+  },
+};
+const siteTestimonials = [
+  [
+    [
+      {
+        comment:
+          'Laborum quis quam. Dolorum et ut quod quia. Voluptas numquam delectus nihil. Aut enim doloremque et ipsam.',
+        name: 'Leslie Alexander',
+        handle: 'lesliealexander',
+        image: {
+          src: '/images/testimonials/young-lady-in-red-smiling.jpeg',
+          alt: 'Leslie Alexander',
+          width: 100,
+          height: 100,
+        },
+      },
+      // More testimonials...
+    ],
+    [
+      {
+        comment:
+          'Aut reprehenderit voluptatem eum asperiores beatae id. Iure molestiae ipsam ut officia rem nulla blanditiis.',
+        name: 'Lindsay Walton',
+        handle: 'lindsaywalton',
+        image: {
+          src: '/images/testimonials/woman-in-blue.jpeg',
+          alt: 'Lindsay Walton',
+          width: 100,
+          height: 100,
+        },
+      },
+      // More testimonials...
+    ],
+  ],
+  [
+    [
+      {
+        comment:
+          'Voluptas quos itaque ipsam in voluptatem est. Iste eos blanditiis repudiandae. Earum deserunt enim molestiae ipsum perferendis recusandae saepe corrupti.',
+        name: 'Tom Cook',
+        handle: 'tomcook',
+        image: {
+          src: '/images/testimonials/man-in-glass-looking-left.jpeg',
+          alt: 'Tom Cook',
+          width: 100,
+          height: 100,
+        },
+      },
+      // More testimonials...
+    ],
+    [
+      {
+        comment:
+          'Molestias ea earum quos nostrum doloremque sed. Quaerat quasi aut velit incidunt excepturi rerum voluptatem minus harum.',
+        name: 'Leonard Krasner',
+        handle: 'leonardkrasner',
+        image: {
+          src: '/images/testimonials/man-in-sunglasses.jpeg',
+          alt: 'Leonard Krasner',
+          width: 100,
+          height: 100,
+        },
+      },
+      // More testimonials...
+    ],
+  ],
+];
 export {
   siteCompanyPersonel,
   siteCompanystats,
   siteContact,
   siteFaqsHost,
   siteFaqsOwner,
+  siteFeaturedTestimonial,
   siteFooterNavigation,
   siteNavbarNavigation,
   siteOurMission,
   sitePlatformStat,
   siteSupport,
+  siteTestimonials,
 };

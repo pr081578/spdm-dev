@@ -78,7 +78,7 @@ function WithTestimonialAndStatContent({
                       <strong className="font-semibold text-white">
                         {testimonial.name + ','}
                       </strong>{' '}
-                      {testimonial.title + ' @ ' + testimonial.company}
+                      {testimonial.title + ' @ ' + testimonial.company?.name}
                     </figcaption>
                   </>
                 ) : (

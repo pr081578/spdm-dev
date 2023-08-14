@@ -1,34 +1,34 @@
+import type { TestimonialDataType } from '@customTypes/generics';
 import Image from 'next/image';
 
-const featuredTestimonial = {
-  body: 'Integer id nunc sit semper purus. Bibendum at lacus ut arcu blandit montes vitae auctor libero. Hac condimentum dignissim nibh vulputate ut nunc. Amet nibh orci mi venenatis blandit vel et proin. Non hendrerit in vel ac diam.',
-  author: {
-    name: 'Brenna Goyette',
-    handle: 'brennagoyette',
-    imageUrl: '/images/testimonials/woman-in-white-shirt.jpeg',
-    logoUrl: 'https://tailwindui.com/img/logos/savvycal-logo-gray-900.svg',
-  },
-};
 const testimonials = [
   [
     [
       {
-        body: 'Laborum quis quam. Dolorum et ut quod quia. Voluptas numquam delectus nihil. Aut enim doloremque et ipsam.',
-        author: {
-          name: 'Leslie Alexander',
-          handle: 'lesliealexander',
-          imageUrl: '/images/testimonials/young-lady-in-red-smiling.jpeg',
+        comment:
+          'Laborum quis quam. Dolorum et ut quod quia. Voluptas numquam delectus nihil. Aut enim doloremque et ipsam.',
+        name: 'Leslie Alexander',
+        handle: 'lesliealexander',
+        image: {
+          src: '/images/testimonials/young-lady-in-red-smiling.jpeg',
+          alt: 'Leslie Alexander',
+          width: 100,
+          height: 100,
         },
       },
       // More testimonials...
     ],
     [
       {
-        body: 'Aut reprehenderit voluptatem eum asperiores beatae id. Iure molestiae ipsam ut officia rem nulla blanditiis.',
-        author: {
-          name: 'Lindsay Walton',
-          handle: 'lindsaywalton',
-          imageUrl: '/images/testimonials/woman-in-blue.jpeg',
+        comment:
+          'Aut reprehenderit voluptatem eum asperiores beatae id. Iure molestiae ipsam ut officia rem nulla blanditiis.',
+        name: 'Lindsay Walton',
+        handle: 'lindsaywalton',
+        image: {
+          src: '/images/testimonials/woman-in-blue.jpeg',
+          alt: 'Lindsay Walton',
+          width: 100,
+          height: 100,
         },
       },
       // More testimonials...
@@ -37,34 +37,52 @@ const testimonials = [
   [
     [
       {
-        body: 'Voluptas quos itaque ipsam in voluptatem est. Iste eos blanditiis repudiandae. Earum deserunt enim molestiae ipsum perferendis recusandae saepe corrupti.',
-        author: {
-          name: 'Tom Cook',
-          handle: 'tomcook',
-          imageUrl: '/images/testimonials/man-in-glass-looking-left.jpeg',
+        comment:
+          'Voluptas quos itaque ipsam in voluptatem est. Iste eos blanditiis repudiandae. Earum deserunt enim molestiae ipsum perferendis recusandae saepe corrupti.',
+        name: 'Tom Cook',
+        handle: 'tomcook',
+        image: {
+          src: '/images/testimonials/man-in-glass-looking-left.jpeg',
+          alt: 'Tom Cook',
+          width: 100,
+          height: 100,
         },
       },
       // More testimonials...
     ],
     [
       {
-        body: 'Molestias ea earum quos nostrum doloremque sed. Quaerat quasi aut velit incidunt excepturi rerum voluptatem minus harum.',
-        author: {
-          name: 'Leonard Krasner',
-          handle: 'leonardkrasner',
-          imageUrl: '/images/testimonials/man-in-sunglasses.jpeg',
+        comment:
+          'Molestias ea earum quos nostrum doloremque sed. Quaerat quasi aut velit incidunt excepturi rerum voluptatem minus harum.',
+        name: 'Leonard Krasner',
+        handle: 'leonardkrasner',
+        image: {
+          src: '/images/testimonials/man-in-sunglasses.jpeg',
+          alt: 'Leonard Krasner',
+          width: 100,
+          height: 100,
         },
       },
       // More testimonials...
     ],
   ],
 ];
+{
+  /*testimonials: [
+    [TestimonialDataType[], TestimonialDataType[]],
+    [TestimonialDataType[], TestimonialDataType[]],
+  ];*/
+}
+interface TestimonialProps {
+  featuredTestimonial: TestimonialDataType;
+  testimonials: TestimonialDataType[][][];
+}
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-function GridTestimonial() {
+function GridTestimonial({ featuredTestimonial }: TestimonialProps) {
   return (
     <div className="relative isolate bg-white pb-32 pt-24 sm:pt-32">
       <div
@@ -103,28 +121,42 @@ function GridTestimonial() {
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
           <figure className="col-span-2 hidden sm:block sm:rounded-2xl sm:bg-white sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1">
             <blockquote className="p-12 text-xl font-semibold leading-8 tracking-tight text-gray-900">
-              <p>{`“${featuredTestimonial.body}”`}</p>
+              <p>“{featuredTestimonial.comment}”</p>
             </blockquote>
             <figcaption className="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
               <Image
                 className="h-10 w-10 flex-none rounded-full bg-gray-50"
-                src={featuredTestimonial.author.imageUrl}
-                alt=""
-                width={100}
-                height={100}
+                src={featuredTestimonial.image.src}
+                alt={featuredTestimonial.image.alt}
+                width={featuredTestimonial.image.width}
+                height={featuredTestimonial.image.height}
               />
               <div className="flex-auto">
-                <div className="font-semibold">
-                  {featuredTestimonial.author.name}
-                </div>
-                <div className="text-gray-600">{`@${featuredTestimonial.author.handle}`}</div>
+                <div className="font-semibold">{featuredTestimonial.name}</div>
+                <div className="text-gray-600">{`@${featuredTestimonial.handle}`}</div>
               </div>
               <Image
                 className="h-10 w-auto flex-none"
-                src={featuredTestimonial.author.logoUrl}
-                alt=""
-                width={100}
-                height={100}
+                src={
+                  featuredTestimonial.company?.logoImage.src
+                    ? featuredTestimonial.company?.logoImage.src
+                    : '/images/logo2.png'
+                }
+                alt={
+                  featuredTestimonial.company?.logoImage.alt
+                    ? featuredTestimonial.company?.logoImage.alt
+                    : ''
+                }
+                width={
+                  featuredTestimonial.company?.logoImage.width
+                    ? featuredTestimonial.company?.logoImage.width
+                    : 100
+                }
+                height={
+                  featuredTestimonial.company?.logoImage.height
+                    ? featuredTestimonial.company?.logoImage.height
+                    : 100
+                }
               />
             </figcaption>
           </figure>
@@ -147,25 +179,25 @@ function GridTestimonial() {
                 >
                   {column.map((testimonial) => (
                     <figure
-                      key={testimonial.author.handle}
+                      key={testimonial.handle}
                       className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5"
                     >
                       <blockquote className="text-gray-900">
-                        <p>{`“${testimonial.body}”`}</p>
+                        <p>{`“${testimonial.comment}”`}</p>
                       </blockquote>
                       <figcaption className="mt-6 flex items-center gap-x-4">
                         <Image
                           className="h-10 w-10 rounded-full bg-gray-50"
-                          src={testimonial.author.imageUrl}
-                          alt=""
-                          width={100}
-                          height={100}
+                          src={testimonial.image.src}
+                          alt={testimonial.image.alt}
+                          width={testimonial.image.width}
+                          height={testimonial.image.height}
                         />
                         <div>
                           <div className="font-semibold">
-                            {testimonial.author.name}
+                            {testimonial.name}
                           </div>
-                          <div className="text-gray-600">{`@${testimonial.author.handle}`}</div>
+                          <div className="text-gray-600">{`@${testimonial.handle}`}</div>
                         </div>
                       </figcaption>
                     </figure>

@@ -106,9 +106,7 @@ function WithTestimonialContent({
                         {testimonial.name}
                       </div>
                       <div className="text-gray-600">
-                        {testimonial.socialTagName
-                          ? testimonial.socialTagName
-                          : ''}
+                        {testimonial.handle ? testimonial.handle : ''}
                       </div>
                     </div>
                   </figcaption>
