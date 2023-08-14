@@ -73,7 +73,15 @@ type SimpleContentDataType = {
   content: string;
 };
 
+type AddressDataType = {
+  street: string;
+  cityStateZip: string;
+  phone: string;
+  email: string;
+};
+
 export type {
+  AddressDataType,
   BulletinDataType,
   CardDataType,
   ContentDataType,

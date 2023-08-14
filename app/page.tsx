@@ -1,5 +1,5 @@
 import { Footer } from '@components/commons/footers/Footer';
-import { SimpleCenteredDarkCTA as MyCTA } from '@components/ctas/DarkPanel';
+import { SimpleCenteredDarkCTA as MyCTA } from '@components/ctas/SimpleCenteredDarkCTA';
 import { CenteredFeature as MyFeature } from '@components/features/CenteredFeature';
 import { SimpleHero as MyHero } from '@components/heroes/SimpleHero';
 import { SimpleStatDark as MyStat } from '@components/stats/SimpleStatDark';

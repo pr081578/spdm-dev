@@ -132,7 +132,7 @@ const ourContent = {
 };
 
 const ourHero = {
-  title: `We're changin the way car sharing operations`,
+  title: `We're changing the way car sharing operations`,
   description: `We're revolutionizing car sharing operations by introducing an innovative 
   platform that streamlines every step of the journey. Our technology simplifies vehicle listings, 
   automates bookings, and enhances communication between owners, hosts, and guests. With a focus on trust, 
@@ -143,8 +143,8 @@ const ourHero = {
     href: '/commons/get-started',
   },
   secondaryLink: {
-    name: 'Learn more',
-    href: '/commons/learn-more',
+    name: 'Read more',
+    href: '/commons/read-more',
   },
   navigation: siteNavbarNavigation,
 };

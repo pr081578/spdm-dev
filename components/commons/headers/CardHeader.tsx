@@ -6,7 +6,7 @@ interface HeaderProps {
   description?: string;
   cards: CardDataType[];
 }
-function CardHeaders({ cards, title, description }: HeaderProps) {
+function CardHeader({ cards, title, description }: HeaderProps) {
   return (
     <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
       <Image
@@ -67,4 +67,4 @@ function CardHeaders({ cards, title, description }: HeaderProps) {
   );
 }
 
-export { CardHeaders };
+export { CardHeader };

@@ -1,5 +1,10 @@
+'use client';
+import { useRouter } from 'next/navigation';
+
 const Page = () => {
-  return <div>Get Started</div>;
+  const router = useRouter();
+
+  return router.push('/register');
 };
 
 export default Page;

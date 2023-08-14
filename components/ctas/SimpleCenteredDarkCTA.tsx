@@ -6,8 +6,8 @@ interface SimpleCenteredDarkCTAProps {
   title?: string;
   tagline?: string;
   description?: string;
-  primaryLink: NavigationDataType;
-  secondaryLink: NavigationDataType;
+  primaryLink?: NavigationDataType;
+  secondaryLink?: NavigationDataType;
 }
 
 function SimpleCenteredDarkCTA({
