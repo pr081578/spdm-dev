@@ -3,8 +3,9 @@ import { useRouter } from 'next/navigation';
 
 const Page = () => {
   const router = useRouter();
+  router.push('/register');
 
-  return router.push('/register');
+  return <></>;
 };
 
 export default Page;
