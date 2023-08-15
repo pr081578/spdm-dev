@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 
-import { AuthProvider } from '@context/authContext';
 import { GlobalContextProvider } from '@context/globalContext';
-import { NextUiProviders } from '../context/nextUiContext';
 
 import '@styles/globals.css';
+import { Providers } from './providers';
 
 export const metadata: Metadata = {
   title: 'SPDM - Share Parking Depot Management',
@@ -19,11 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <AuthProvider>
-          <NextUiProviders>
-            <GlobalContextProvider>{children}</GlobalContextProvider>
-          </NextUiProviders>
-        </AuthProvider>
+        <Providers>
+          <GlobalContextProvider>{children}</GlobalContextProvider>
+        </Providers>
       </body>
     </html>
   );

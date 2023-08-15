@@ -98,9 +98,9 @@ const footerLogo = {
   alt: 'logo',
 };
 
-export default function Home() {
+export default async function Home() {
   return (
-    <div>
+    <>
       <MyHero
         announcement={heroAnnouncement}
         navigation={siteNavbarNavigation}
@@ -125,6 +125,6 @@ export default function Home() {
         secondaryLink={ctaSecondaryLink}
       />
       <Footer navigation={siteFooterNavigation} logo={footerLogo} />
-    </div>
+    </>
   );
 }
