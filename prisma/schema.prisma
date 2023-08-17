@@ -11,8 +11,294 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
+  // Located Indentification
+  id       String   @id @default(uuid())
+  email    String   @unique
   password String
   name     String
+  role     RoleType @default(BASIC)
+  image    String?
+  // One To Many Relations - Many
+  Owner    Owner?
+  Host     Host?
+  // Creation and Update
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+}
+
+model Vehicle {
+  // Located Indentification
+  id                 String          @id @default(uuid())
+  // Registration and Vin/Register state 
+  vin                String          @unique
+  registrationNumber String
+  city               String
+  state              String
+  country            String
+  zipCode            String
+  // Metrics and Attributes
+  mileage            Int
+  vuel               String
+  gasGrade           String
+  cityMPG            Int
+  hwyMPG             Int
+  driveTrain         String
+  seatCount          String
+  // Details Information
+  description        String
+  color              String
+  // One To Many Relations - (Many Side)
+  Owner              Owner           @relation(fields: [ownerId], references: [id])
+  ownerId            String
+  Host               Host?           @relation(fields: [hostId], references: [id])
+  hostId             String?
+  PhysicalAddress    PhysicalAddress @relation("Physical", fields: [physicalAddressId], references: [id])
+  physicalAddressId  String
+  DeliverAddress     PhysicalAddress @relation("Deliver", fields: [deliverAddressId], references: [id])
+  deliverAddressId   String
+  receiveAddress     PhysicalAddress @relation("Receive", fields: [receiveAddressId], references: [id])
+  receiveAddressId   String
+  PlatformCharge     PlatformCharge  @relation(fields: [platformChargeId], references: [id])
+  platformChargeId   String
+  HostInsurance      HostInsurance   @relation(fields: [hostInsuranceId], references: [id])
+  hostInsuranceId    String
+  // One To Many Relations - (One Side)
+  Features           Features[]
+  HostCharges        HostCharge[]
+  Reservation        Reservation[]
+  // Creation and Update
+  createAt           DateTime        @default(now())
+  updateAt           DateTime        @updatedAt
+}
+
+model PhysicalAddress {
+  // Located Indentification
+  id       String    @id @default(uuid())
+  address  String
+  city     String
+  state    String
+  country  String
+  zipCode  String
+  // One To Many Relations - (One Side)
+  Physical Vehicle[] @relation("Physical")
+  Deliver  Vehicle[] @relation("Deliver")
+  Receive  Vehicle[] @relation("Receive")
+  Hosts    Host[]
+  Owners   Owner[]
+
+  // Addition Attributes to Table
+  @@unique([address, city, state, country, zipCode])
+}
+
+model Host {
+  // Located Indentification
+  id String @id @default(uuid())
+  // Metrics and Attributes
+
+  // One To Many Relations - (Many Side)
+  user              User            @relation(fields: [userId], references: [id])
+  userId            String          @unique
+  PhysicalAddress   PhysicalAddress @relation(fields: [physicalAddressId], references: [id])
+  physicalAddressId String
+  // One To Many Relations - (One Side)
+  Vehicles          Vehicle[]
+  HostCharge        HostCharge[]
+  HostInsurance     HostInsurance[]
+  // Creation and Update
+  createAt          DateTime        @default(now())
+  updateAt          DateTime        @updatedAt
+}
+
+model Owner {
+  // Located Indentification
+  id                String          @id @default(uuid())
+  // One To Many Relations - (Many Side)
+  user              User            @relation(fields: [userId], references: [id])
+  userId            String          @unique
+  PhysicalAddress   PhysicalAddress @relation(fields: [physicalAddressId], references: [id])
+  physicalAddressId String
+  // One To Many Relations - (One Side)
+  Vehicles          Vehicle[]
+  // Creation and Update
+  createAt          DateTime        @default(now())
+  updateAt          DateTime        @updatedAt
+}
+
+model Features {
+  // Located Indentification
+  id                String   @id @default(uuid())
+  name              String   @unique
+  // One To Many Relations - One
+  vehicleFeatures   Vehicle  @relation(fields: [vehicleFeaturesId], references: [id])
+  vehicleFeaturesId String
+  // Creation and Update
+  createAt          DateTime @default(now())
+  updateAt          DateTime @updatedAt
+}
+
+model HostCharge {
+  // Located Indentification
+  id        String   @id @default(uuid())
+  name      String
+  price     Float
+  // One To Many Relations - (Many Side)
+  Vehicle   Vehicle? @relation(fields: [vehicleId], references: [id])
+  vehicleId String?
+  // Creation and Update
+  createAt  DateTime @default(now())
+  updateAt  DateTime @updatedAt
+  Host      Host?    @relation(fields: [hostId], references: [id])
+  hostId    String?
+}
+
+model PlatformCharge {
+  // Located Indentification
+  id         String    @id @default(uuid())
+  percentage Float
+  price      Float
+  // One To Many Relations - (One Side)
+  Vehicles   Vehicle[]
+  // Creation and Update
+  createAt   DateTime  @default(now())
+  updateAt   DateTime  @updatedAt
+}
+
+model Reservation {
+  // Located Indentification
+  id                            String                   @id @default(uuid())
+  // Metrics and Attributes
+  deliverAt                     DateTime
+  returnAt                      DateTime
+  license                       String
+  beforeMilage                  Int
+  beforeFuelLevel               FuelLevelType
+  afterMilage                   Int
+  afterFuelLevel                FuelLevelType
+  hostHasConfirmed              Boolean
+  ownerHasConfirmed             Boolean
+  // One To One Relations
+  Vehicle                       Vehicle                  @relation(fields: [vehicleId], references: [id])
+  vehicleId                     String                   @unique
+  CarSharingRequest             CarsharingRequest        @relation(fields: [carSharingRequestId], references: [id])
+  carSharingRequestId           String                   @unique
+  // One To Many Relations - (One Side)
+  beforeUploadReservationPhotos UploadReservationPhoto[] @relation("BeforePhotos")
+  afterUploadReservationPhotos  UploadReservationPhoto[] @relation("AfterPhotos")
+  // Creation and Update
+  createAt                      DateTime                 @default(now())
+  updateAt                      DateTime                 @updatedAt
+}
+
+model Guest {
+  // Located Indentification
+  id           String              @id @default(uuid())
+  // Metrics and Attributes
+  firstName    String
+  lastName     String
+  email        String
+  phoneNumber  String
+  isVerified   Boolean
+  guestPhotos  UploadGuestPhoto[]
+  // One To Many Relations - (One Side)
+  Reservations CarsharingRequest[]
+  // Creation and Update
+  createAt     DateTime            @default(now())
+  updateAt     DateTime            @updatedAt
+}
+
+model HostInsurance {
+  // Located Indentification
+  id          String                    @id @default(uuid())
+  // Metrics and Attributes
+  type        HostInsuranceType
+  // One To One Relations
+  Host        Host                      @relation(fields: [hostId], references: [id])
+  hostId      String
+  // One To Many Relations - (One Side)
+  Vehicle     Vehicle[]
+  UploadFiles UploadHostInsuranceFile[]
+  // Creation and Update
+  createAt    DateTime                  @default(now())
+  updateAt    DateTime                  @updatedAt
+}
+
+model UploadReservationPhoto {
+  // Located Indentification
+  id                  String       @id @default(uuid())
+  fileName            String       @unique
+  // One To Many Relations - (Many Side)
+  BeforeReservation   Reservation? @relation("BeforePhotos", fields: [beforeReservationId], references: [id])
+  beforeReservationId String?
+  afferReservation    Reservation? @relation("AfterPhotos", fields: [afterReservationId], references: [id])
+  afterReservationId  String?
+  // Creation and Update
+  createAt            DateTime     @default(now())
+  updateAt            DateTime     @updatedAt
+}
+
+model UploadHostInsuranceFile {
+  // Located Indentification
+  id              String        @id @default(uuid())
+  fileName        String        @unique
+  // One To Many Relations - (Many Side)
+  HostInsurance   HostInsurance @relation(fields: [hostInsuranceId], references: [id])
+  hostInsuranceId String
+  // Creation and Update
+  createAt        DateTime      @default(now())
+  updateAt        DateTime      @updatedAt
+}
+
+model UploadGuestPhoto {
+  // Located Indentification
+  id       String   @id @default(uuid())
+  fileName String   @unique
+  // One To Many Relations - (Many Side)
+  Guest    Guest    @relation(fields: [guestId], references: [id])
+  guestId  String
+  // Creation and Update
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+}
+
+model CarsharingRequest {
+  // Located Indentification
+  id              String         @id @default(uuid())
+  type            CarSharingType
+  deliverAt       DateTime
+  returnAt        DateTime
+  deliverAddress  String
+  receiveAddress  String
+  requestApproved Boolean        @default(false)
+  // One To Many Relations - (Many Side)
+  Guest           Guest          @relation(fields: [guestId], references: [id])
+  guestId         String
+  // One To Many Relations - (One Side)
+  Reservation     Reservation?
+  // Creation and Update
+  createAt        DateTime       @default(now())
+  updateAt        DateTime       @updatedAt
+}
+
+enum RoleType {
+  BASIC
+  ADMIN
+}
+
+enum CarSharingType {
+  TURO
+  GETAROUND
+  HYERCAR
+}
+
+enum HostInsuranceType {
+  INTERIOR
+  EXTERIOR
+}
+
+enum FuelLevelType {
+  EMPTY
+  ONEFORTH
+  HALF
+  THREEFORTH
+  FULL
 }

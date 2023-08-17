@@ -3,6 +3,7 @@ const { hash } = require('bcrypt');
 const prisma = new PrismaClient();
 
 async function main() {
+  await prisma.user.deleteMany();
   // ... you will write your Prisma Client queries here
   const password = await hash('test', 12);
   const user = await prisma.user.upsert({

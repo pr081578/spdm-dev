@@ -1,0 +1,145 @@
+erDiagram
+
+        Role {
+            BASIC BASIC
+ADMIN ADMIN
+        }
+    
+
+
+        CarSharing {
+            TURO TURO
+GETAROUND GETAROUND
+HYERCAR HYERCAR
+        }
+    
+  "User" {
+    String id "🗝️"
+    String email 
+    String password 
+    String name 
+    Role role 
+    DateTime createAt 
+    DateTime updateAt 
+    }
+  
+
+  "Vehicle" {
+    String id "🗝️"
+    String vin 
+    String registrationNumber 
+    String city 
+    String state 
+    String country 
+    String zipCode 
+    Int mileage 
+    String vuel 
+    String gasGrade 
+    Int cityMPG 
+    Int hwyMPG 
+    String driveTrain 
+    String seatCount 
+    String description 
+    String color 
+    DateTime createAt 
+    DateTime updateAt 
+    }
+  
+
+  "PhysicalAddress" {
+    String id "🗝️"
+    String address 
+    String city 
+    String state 
+    String country 
+    String zipCode 
+    }
+  
+
+  "Host" {
+    String id "🗝️"
+    DateTime createAt 
+    DateTime updateAt 
+    }
+  
+
+  "Owner" {
+    String id "🗝️"
+    DateTime createAt 
+    DateTime updateAt 
+    }
+  
+
+  "Features" {
+    String id "🗝️"
+    String name 
+    DateTime createAt 
+    DateTime updateAt 
+    }
+  
+
+  "HostCharge" {
+    String id "🗝️"
+    String name 
+    Float price 
+    DateTime createAt 
+    DateTime updateAt 
+    }
+  
+
+  "PlatformCharge" {
+    String id "🗝️"
+    Float percentage 
+    Float price 
+    DateTime createAt 
+    DateTime updateAt 
+    }
+  
+
+  "CarSharingPlatform" {
+    String id "🗝️"
+    CarSharing carsharing 
+    DateTime createAt 
+    DateTime updateAt 
+    }
+  
+
+  "Reservation" {
+    String id "🗝️"
+    DateTime deliverAt 
+    DateTime returnAt 
+    String guestFirstName 
+    String guestLastName 
+    String license 
+    DateTime createAt 
+    DateTime updateAt 
+    }
+  
+    "User" o|--|| "Role" : "enum:role"
+    "User" o{--}o "Owner" : "Owner"
+    "User" o{--}o "Host" : "Host"
+    "Vehicle" o|--|| "Owner" : "Owner"
+    "Vehicle" o|--|o "Host" : "Host"
+    "Vehicle" o|--|| "PhysicalAddress" : "PhysicalAddress"
+    "Vehicle" o|--|| "PhysicalAddress" : "DeliverAddress"
+    "Vehicle" o|--|| "PhysicalAddress" : "receiveAddress"
+    "Vehicle" o|--|| "PlatformCharge" : "PlatformCharge"
+    "Vehicle" o{--}o "Features" : "Features"
+    "Vehicle" o{--}o "HostCharge" : "HostCharges"
+    "Vehicle" o{--}o "Reservation" : "Reservation"
+    "PhysicalAddress" o{--}o "Vehicle" : "Physical"
+    "PhysicalAddress" o{--}o "Vehicle" : "Deliver"
+    "PhysicalAddress" o{--}o "Vehicle" : "Receive"
+    "PhysicalAddress" o{--}o "Host" : "Host"
+    "PhysicalAddress" o{--}o "Owner" : "Owner"
+    "Host" o|--|| "User" : "user"
+    "Host" o|--|| "PhysicalAddress" : "PhysicalAddress"
+    "Host" o{--}o "Vehicle" : "Vehicles"
+    "Owner" o|--|| "User" : "user"
+    "Owner" o|--|| "PhysicalAddress" : "PhysicalAddress"
+    "Owner" o{--}o "Vehicle" : "Vehicles"
+    "Features" o|--|| "Vehicle" : "vehicleFeatures"
+    "HostCharge" o|--|o "Vehicle" : "Vehicle"
+    "PlatformCharge" o{--}o "Vehicle" : "Vehicles"
+    "CarSharingPlatform" o|--|| "CarSharing" : "enum:carsharing"
+    "Reservation" o|--|| "Vehicle" : "Vehicle"
