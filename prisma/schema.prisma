@@ -31,6 +31,10 @@ model Vehicle {
   id                 String          @id @default(uuid())
   // Registration and Vin/Register state 
   vin                String          @unique
+  make               String
+  model              String
+  trim               String
+  year               Int
   registrationNumber String
   city               String
   state              String
@@ -43,32 +47,31 @@ model Vehicle {
   cityMPG            Int
   hwyMPG             Int
   driveTrain         String
-  seatCount          String
+  seatCount          Int
   // Details Information
   description        String
   color              String
-  // One To Many Relations - (Many Side)
-  Owner              Owner           @relation(fields: [ownerId], references: [id])
+  // One To One Relations
+  Owner              Owner           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId            String
-  Host               Host?           @relation(fields: [hostId], references: [id])
+  Host               Host?           @relation(fields: [hostId], references: [id], onDelete: Cascade)
   hostId             String?
   PhysicalAddress    PhysicalAddress @relation("Physical", fields: [physicalAddressId], references: [id])
   physicalAddressId  String
   DeliverAddress     PhysicalAddress @relation("Deliver", fields: [deliverAddressId], references: [id])
   deliverAddressId   String
-  receiveAddress     PhysicalAddress @relation("Receive", fields: [receiveAddressId], references: [id])
+  ReceiveAddress     PhysicalAddress @relation("Receive", fields: [receiveAddressId], references: [id])
   receiveAddressId   String
-  PlatformCharge     PlatformCharge  @relation(fields: [platformChargeId], references: [id])
-  platformChargeId   String
-  HostInsurance      HostInsurance   @relation(fields: [hostInsuranceId], references: [id])
-  hostInsuranceId    String
+
+  HostInsurance   HostInsurance? @relation(fields: [hostInsuranceId], references: [id])
+  hostInsuranceId String?
   // One To Many Relations - (One Side)
-  Features           Features[]
-  HostCharges        HostCharge[]
-  Reservation        Reservation[]
+  Features        Features[]
+  HostCharges     HostCharge[]
+  Reservation     Reservation[]
   // Creation and Update
-  createAt           DateTime        @default(now())
-  updateAt           DateTime        @updatedAt
+  createAt        DateTime       @default(now())
+  updateAt        DateTime       @updatedAt
 }
 
 model PhysicalAddress {
@@ -96,9 +99,9 @@ model Host {
   // Metrics and Attributes
 
   // One To Many Relations - (Many Side)
-  user              User            @relation(fields: [userId], references: [id])
+  User              User            @relation(fields: [userId], references: [id])
   userId            String          @unique
-  PhysicalAddress   PhysicalAddress @relation(fields: [physicalAddressId], references: [id])
+  PhysicalAddress   PhysicalAddress @relation(fields: [physicalAddressId], references: [id], onDelete: Cascade)
   physicalAddressId String
   // One To Many Relations - (One Side)
   Vehicles          Vehicle[]
@@ -113,7 +116,7 @@ model Owner {
   // Located Indentification
   id                String          @id @default(uuid())
   // One To Many Relations - (Many Side)
-  user              User            @relation(fields: [userId], references: [id])
+  User              User            @relation(fields: [userId], references: [id])
   userId            String          @unique
   PhysicalAddress   PhysicalAddress @relation(fields: [physicalAddressId], references: [id])
   physicalAddressId String
@@ -129,8 +132,8 @@ model Features {
   id                String   @id @default(uuid())
   name              String   @unique
   // One To Many Relations - One
-  vehicleFeatures   Vehicle  @relation(fields: [vehicleFeaturesId], references: [id])
-  vehicleFeaturesId String
+  vehicleFeatures   Vehicle? @relation(fields: [vehicleFeaturesId], references: [id])
+  vehicleFeaturesId String?
   // Creation and Update
   createAt          DateTime @default(now())
   updateAt          DateTime @updatedAt
@@ -153,14 +156,14 @@ model HostCharge {
 
 model PlatformCharge {
   // Located Indentification
-  id         String    @id @default(uuid())
-  percentage Float
-  price      Float
-  // One To Many Relations - (One Side)
-  Vehicles   Vehicle[]
+  id          String       @id @default(uuid())
+  percentage  Float
+  price       Float
+  // One To One Relations - (One Side)
+  Reservation Reservation?
   // Creation and Update
-  createAt   DateTime  @default(now())
-  updateAt   DateTime  @updatedAt
+  createAt    DateTime     @default(now())
+  updateAt    DateTime     @updatedAt
 }
 
 model Reservation {
@@ -177,10 +180,12 @@ model Reservation {
   hostHasConfirmed              Boolean
   ownerHasConfirmed             Boolean
   // One To One Relations
-  Vehicle                       Vehicle                  @relation(fields: [vehicleId], references: [id])
-  vehicleId                     String                   @unique
+  Vehicle                       Vehicle?                 @relation(fields: [vehicleId], references: [id])
+  vehicleId                     String?                  @unique
   CarSharingRequest             CarsharingRequest        @relation(fields: [carSharingRequestId], references: [id])
   carSharingRequestId           String                   @unique
+  PlatformCharge                PlatformCharge           @relation(fields: [platformChargeId], references: [id])
+  platformChargeId              String                   @unique
   // One To Many Relations - (One Side)
   beforeUploadReservationPhotos UploadReservationPhoto[] @relation("BeforePhotos")
   afterUploadReservationPhotos  UploadReservationPhoto[] @relation("AfterPhotos")
@@ -189,7 +194,7 @@ model Reservation {
   updateAt                      DateTime                 @updatedAt
 }
 
-model Guest {
+model GuestRequest {
   // Located Indentification
   id           String              @id @default(uuid())
   // Metrics and Attributes
@@ -201,6 +206,7 @@ model Guest {
   guestPhotos  UploadGuestPhoto[]
   // One To Many Relations - (One Side)
   Reservations CarsharingRequest[]
+  price        Float
   // Creation and Update
   createAt     DateTime            @default(now())
   updateAt     DateTime            @updatedAt
@@ -250,14 +256,14 @@ model UploadHostInsuranceFile {
 
 model UploadGuestPhoto {
   // Located Indentification
-  id       String   @id @default(uuid())
-  fileName String   @unique
+  id             String       @id @default(uuid())
+  fileName       String       @unique
   // One To Many Relations - (Many Side)
-  Guest    Guest    @relation(fields: [guestId], references: [id])
-  guestId  String
+  GuestRequest   GuestRequest @relation(fields: [guestRequestId], references: [id])
+  guestRequestId String
   // Creation and Update
-  createAt DateTime @default(now())
-  updateAt DateTime @updatedAt
+  createAt       DateTime     @default(now())
+  updateAt       DateTime     @updatedAt
 }
 
 model CarsharingRequest {
@@ -270,8 +276,8 @@ model CarsharingRequest {
   receiveAddress  String
   requestApproved Boolean        @default(false)
   // One To Many Relations - (Many Side)
-  Guest           Guest          @relation(fields: [guestId], references: [id])
-  guestId         String
+  GuestRequest    GuestRequest   @relation(fields: [guestRequestId], references: [id])
+  guestRequestId  String
   // One To Many Relations - (One Side)
   Reservation     Reservation?
   // Creation and Update
