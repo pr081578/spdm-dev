@@ -10,7 +10,6 @@ interface CreateUserProps {
 }
 
 async function createUser({ email, name, password }: CreateUserProps) {
-  await prisma.user.deleteMany();
   // you will write your Prisma Client queries here
   const user = await prisma.user.upsert({
     where: { email: email },
@@ -30,12 +29,12 @@ async function createUser({ email, name, password }: CreateUserProps) {
 interface CreateHostProps {
   user: any;
   address: any;
+  hostInsurance?: any;
 }
 
-async function createHost({ user, address }: CreateHostProps) {
-  await prisma.host.deleteMany();
+async function createHost({ user, address, hostInsurance }: CreateHostProps) {
   // ... you will write your Prisma Client queries here
-  await prisma.host.upsert({
+  const host = await prisma.host.upsert({
     where: { userId: user.id },
     update: {},
     create: {
@@ -43,15 +42,10 @@ async function createHost({ user, address }: CreateHostProps) {
       PhysicalAddress: { connect: { id: address.id } },
     },
   });
-  const host = await prisma.host.findFirst({
-    where: {
-      userId: user.id,
-    },
-  });
-
   if (host) {
     console.log('Host: ', { host });
   }
+
   return host;
 }
 
@@ -70,7 +64,6 @@ async function createPhysicalAddress({
   country,
   zipCode,
 }: CreatePhysicalAddressProps) {
-  await prisma.physicalAddress.deleteMany();
   // ... you will write your Prisma Client queries here
   const physicalAddress = await prisma.physicalAddress.upsert({
     where: {
@@ -103,9 +96,8 @@ interface CreateOwnerProps {
 }
 
 async function createOwner({ user, address }: CreateOwnerProps) {
-  await prisma.owner.deleteMany();
   // ... you will write your Prisma Client queries here
-  await prisma.owner.upsert({
+  const owner = await prisma.owner.upsert({
     where: { userId: user.id },
     update: {},
     create: {
@@ -113,17 +105,39 @@ async function createOwner({ user, address }: CreateOwnerProps) {
       PhysicalAddress: { connect: { id: address.id } },
     },
   });
-  const owner = await prisma.owner.findFirst({
-    where: {
-      userId: user.id,
-    },
-  });
-
   if (owner) {
     console.log('Owner: ', { owner });
   }
-
   return owner;
+}
+
+interface CreateHostInsuranceProps {
+  type?: any;
+  host: any;
+  uploadFiles: String[];
+}
+
+async function createHostInsurance({
+  type,
+  host,
+  uploadFiles,
+}: CreateHostInsuranceProps) {
+  await prisma.hostInsurance.deleteMany();
+  // ... you will write your Prisma Client queries here
+  const hostInsurance = await prisma.hostInsurance.upsert({
+    where: { hostId: host.id },
+    update: {},
+    create: {
+      type: type,
+      Host: { connect: { id: host.id } },
+      uploadFiles: uploadFiles,
+    },
+  });
+  if (hostInsurance) {
+    console.log('HostInsurance: ', { hostInsurance });
+  }
+
+  return hostInsurance;
 }
 
 interface CreateVehicleProps {
@@ -219,55 +233,149 @@ async function CreateVehicle({
   return vehicle;
 }
 
+interface CreateFeatureProps {
+  name: string;
+}
+
+async function CreateFeature({ name }: CreateFeatureProps) {
+  // you will write your Prisma Client queries here
+  const feature = await prisma.feature.upsert({
+    where: { name: name },
+    update: {},
+    create: {
+      name: name,
+    },
+  });
+  if (feature) {
+    console.log('Feature: ', { feature });
+  }
+  return feature;
+}
+
+interface CreateVehicleFeatureProps {
+  vehicle: any;
+  feature: any;
+}
+
+async function CreateVehicleFeature({
+  vehicle,
+  feature,
+}: CreateVehicleFeatureProps) {
+  // you will write your Prisma Client queries here
+  const vehicleId = vehicle.id;
+  const featureId = feature.id;
+  const vehicleFeature = await prisma.vehicleFeature.upsert({
+    where: { vehicleId_featureId: { vehicleId, featureId } },
+    update: {},
+    create: {
+      Vehicle: { connect: { id: vehicle.id } },
+      Feature: { connect: { id: feature.id } },
+    },
+  });
+  if (vehicleFeature) {
+    console.log('VehicleFeature: ', { vehicleFeature });
+  }
+  return vehicle;
+}
+
+interface CreateHostChargeProps {
+  name: String;
+  price: Number;
+  host: any;
+  vehicle: any;
+}
+
+async function CreateHostCharge({
+  name,
+  price,
+  host,
+  vehicle,
+}: CreateHostChargeProps) {
+  // you will write your Prisma Client queries here
+  const vehicleId = vehicle.id;
+  const hostId = host.id;
+  const hostCharge = await prisma.hostCharge.upsert({
+    where: { vehicleId_hostId_name: { vehicleId, hostId, name } },
+    update: {},
+    create: {
+      name: name,
+      price: price,
+      Vehicle: { connect: { id: vehicle.id } },
+      Host: { connect: { id: host.id } },
+    },
+  });
+  if (hostCharge) {
+    console.log('HostCharge: ', { hostCharge });
+  }
+  return hostCharge;
+}
+
 async function main() {
   // ... you will write your Prisma Client queries here
   // Deleting all entries in database
+  await prisma.hostCharge.deleteMany();
+  await prisma.vehicleFeature.deleteMany();
+  await prisma.feature.deleteMany();
+  await prisma.hostInsurance.deleteMany();
   await prisma.vehicle.deleteMany();
   await prisma.host.deleteMany();
   await prisma.owner.deleteMany();
   await prisma.user.deleteMany();
 
   // Create a User
-  const user = await createUser({
-    email: 'test@test.com',
-    name: 'Test User',
+  const userHost = await createUser({
+    email: 'host@example.com',
+    name: 'Host One',
+    password: await hash('test', 12),
+  });
+  const userOwner = await createUser({
+    email: 'owner@example.com',
+    name: 'Owner One',
     password: await hash('test', 12),
   });
 
   // Create an Address
 
-  const physicalAddress = await createPhysicalAddress({
+  const hostPhysicalAddress = await createPhysicalAddress({
     address: '122 Ally Lane',
     city: 'Kansas City',
     state: 'Mo',
     country: 'US',
-
     zipCode: '64101',
   });
 
-  let host = null;
-  let owner = null;
-  let vehicle = null;
-  if (user && physicalAddress) {
+  const ownerPhysicalAddress = await createPhysicalAddress({
+    address: '221 Belly Lane',
+    city: 'Kansas City',
+    state: 'Mo',
+    country: 'US',
+    zipCode: '64101',
+  });
+
+  let host: null = null;
+  let owner: null = null;
+  let vehicle: null = null;
+  if (userHost && hostPhysicalAddress) {
     // Create a Host with user and address
     host = await createHost({
-      user: user,
-      address: physicalAddress,
+      user: userHost,
+      address: hostPhysicalAddress,
+    });
+
+    const hostInsurance = await createHostInsurance({
+      host: host,
+      uploadFiles: ['/files/insurance1.doc', '/files/insurance2.doc'],
     });
   }
-  if (user && physicalAddress) {
+  if (userOwner && ownerPhysicalAddress) {
     // Create a Owner with user and address
     owner = await createOwner({
-      user: user,
-      address: physicalAddress,
+      user: userOwner,
+      address: ownerPhysicalAddress,
     });
   }
 
   if (owner && host) {
-    console.log('Passed Owner, Host and Physcial Address conditions', {
-      owner,
-      host,
-    });
     vehicle = await CreateVehicle({
       vin: 'WDZ90000018523456',
       registrationNumber: 'YS4-R5T',
@@ -289,9 +397,53 @@ async function main() {
       description: '',
       color: 'Red',
       owner: owner,
-      physicalAddress: physicalAddress,
-      deliverAddress: physicalAddress,
-      receiveAddress: physicalAddress,
+      host: host,
+
+      physicalAddress: hostPhysicalAddress,
+      deliverAddress: hostPhysicalAddress,
+      receiveAddress: hostPhysicalAddress,
+    });
+  }
+
+  let features = new Array();
+  if (vehicle) {
+    features.push(
+      await CreateFeature({
+        name: 'heated seats',
+      })
+    );
+    features.push(
+      await CreateFeature({
+        name: 'air condition',
+      })
+    );
+  }
+
+  if (vehicle && features.length > 0) {
+    features.map(async (feature) => {
+      await CreateVehicleFeature({
+        vehicle: vehicle,
+        feature: feature,
+      });
+    });
+  }
+
+  if (vehicle && host) {
+    //enter code
+
+    const hostCharges = new Array();
+    hostCharges.push({ name: 'Cleaning', price: 10.3 });
+    hostCharges.push({ name: 'Storage', price: 10.0 });
+    hostCharges.push({ name: 'Delivery', price: 10.1 });
+    hostCharges.push({ name: 'Recieving', price: 10.0 });
+
+    hostCharges.map(async (charge) => {
+      await CreateHostCharge({
+        name: charge.name,
+        price: charge.price,
+        host: host,
+        vehicle: vehicle,
+      });
     });
   }
 }
