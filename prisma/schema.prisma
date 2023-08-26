@@ -159,31 +159,33 @@ model Vehicle {
   deliverAddressId   String
   ReceiveAddress     PhysicalAddress  @relation("Receive", fields: [receiveAddressId], references: [id])
   receiveAddressId   String
-  // One To Many Relations - (One Side)
-  HostCharges        HostCharge[]
-  Reservation        Reservation[]
   // Creation and Update
   createAt           DateTime         @default(now())
   updateAt           DateTime         @updatedAt
+  // One To Many Relations - (One Side)
+  HostCharges        HostCharge[]
+  Reservation        Reservation[]
   VehicleFeatures    VehicleFeature[]
 }
 
 model GuestRequest {
   // Located Indentification
-  id           String              @id @default(uuid())
+  id           String             @id @default(uuid())
   // Metrics and Attributes
   firstName    String
   lastName     String
   email        String
   phoneNumber  String
-  isVerified   Boolean
-  guestPhotos  UploadGuestPhoto[]
-  // One To Many Relations - (One Side)
-  Reservations CarsharingRequest[]
+  isVerified   Boolean            @default(false)
+  hasApproval  Boolean            @default(false)
   price        Float
   // Creation and Update
-  createAt     DateTime            @default(now())
-  updateAt     DateTime            @updatedAt
+  createAt     DateTime           @default(now())
+  updateAt     DateTime           @updatedAt
+  // One To One Relations
+  Reservations CarsharingRequest?
+  // One To Many Relations - (One Side)
+  guestPhotos  UploadGuestPhoto[]
 }
 
 model Reservation {
@@ -192,7 +194,6 @@ model Reservation {
   // Metrics and Attributes
   deliverAt                     DateTime
   returnAt                      DateTime
-  license                       String
   beforeMilage                  Int
   beforeFuelLevel               FuelLevelType
   afterMilage                   Int
@@ -200,18 +201,18 @@ model Reservation {
   hostHasConfirmed              Boolean
   ownerHasConfirmed             Boolean
   // One To One Relations
-  Vehicle                       Vehicle?                 @relation(fields: [vehicleId], references: [id])
-  vehicleId                     String?                  @unique
+  Vehicle                       Vehicle                  @relation(fields: [vehicleId], references: [id])
+  vehicleId                     String                   @unique
   CarSharingRequest             CarsharingRequest        @relation(fields: [carSharingRequestId], references: [id])
   carSharingRequestId           String                   @unique
   PlatformCharge                PlatformCharge           @relation(fields: [platformChargeId], references: [id])
   platformChargeId              String                   @unique
-  // One To Many Relations - (One Side)
-  beforeUploadReservationPhotos UploadReservationPhoto[] @relation("BeforePhotos")
-  afterUploadReservationPhotos  UploadReservationPhoto[] @relation("AfterPhotos")
   // Creation and Update
   createAt                      DateTime                 @default(now())
   updateAt                      DateTime                 @updatedAt
+  // One To Many Relations - (One Side)
+  beforeUploadReservationPhotos UploadReservationPhoto[] @relation("BeforePhotos")
+  afterUploadReservationPhotos  UploadReservationPhoto[] @relation("AfterPhotos")
 }
 
 model CarsharingRequest {
@@ -225,7 +226,7 @@ model CarsharingRequest {
   requestApproved Boolean        @default(false)
   // One To Many Relations - (Many Side)
   GuestRequest    GuestRequest   @relation(fields: [guestRequestId], references: [id])
-  guestRequestId  String
+  guestRequestId  String         @unique
   // One To Many Relations - (One Side)
   Reservation     Reservation?
   // Creation and Update
@@ -328,3 +329,66 @@ model PlatformCharge {
   createAt    DateTime     @default(now())
   updateAt    DateTime     @updatedAt
 }
+
+// Platform General Tables - [ENDS]
+
+// Platform Accounting Tables - [BEGINS]
+model Account {
+  // Located Indentification
+  id                    String           @id @default(uuid())
+  firstName             String
+  lastName              String
+  bankRouteNumber       String
+  bankAccountNumber     String
+  companyName           String
+  ein                   String
+  AccountBalance        AccountBalance[]
+  CreditorAccountLedger AccountLedger[]  @relation("Creditor")
+  DebiteeAccountLedger  AccountLedger[]  @relation("Debitee")
+  // Creation and Update
+  createAt              DateTime         @default(now())
+  updateAt              DateTime         @updatedAt
+}
+
+model AccountMaster {
+  // Located Indentification
+  id                       String         @id @default(uuid())
+  AccountLeader            AccountLedger  @relation(fields: [accountLedgerId], references: [id])
+  accountLedgerId          String
+  CreditorAccountBalance   AccountBalance @relation("CreditorBalance", fields: [creditorAccountBalanceId], references: [id])
+  creditorAccountBalanceId String
+  DebiteeAccountBalance    AccountBalance @relation("DebiteeBalance", fields: [debiteeAccountBalanceId], references: [id])
+  debiteeAccountBalanceId  String
+  // Creation and Update
+  createAt                 DateTime       @default(now())
+  updateAt                 DateTime       @updatedAt
+}
+
+model AccountBalance {
+  // Located Indentification
+  id                    String          @id @default(uuid())
+  ClientAccount         Account         @relation(fields: [clientAccountId], references: [id])
+  clientAccountId       String          @unique
+  balance               Float
+  // Creation and Update
+  createAt              DateTime        @default(now())
+  updateAt              DateTime        @updatedAt
+  CreditorAccountMaster AccountMaster[] @relation("CreditorBalance")
+  DebiteeAccountMaster  AccountMaster[] @relation("DebiteeBalance")
+}
+
+model AccountLedger {
+  // Located Indentification
+  id            String          @id @default(uuid())
+  Creditor      Account         @relation("Creditor", fields: [creditorId], references: [id])
+  creditorId    String
+  Debitee       Account         @relation("Debitee", fields: [debiteeId], references: [id])
+  debiteeId     String
+  amount        Float
+  // Creation and Update
+  createAt      DateTime        @default(now())
+  updateAt      DateTime        @updatedAt
+  AccountMaster AccountMaster[]
+}
+
+// Platform Accounting Tables - [BEGINS]
